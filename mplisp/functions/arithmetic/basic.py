@@ -1,7 +1,7 @@
 from typing import List
 import functools
-import evaluator
 import math
+from mplisp import evaluator
 
 
 def minus(args: List, node):

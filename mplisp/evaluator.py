@@ -1,6 +1,6 @@
-import syntax
-from structures import tree
-from functions import default_functions
+from mplisp import syntax
+from mplisp.structures import tree
+from mplisp.functions import default_functions
 
 
 def evaluate(value: str):

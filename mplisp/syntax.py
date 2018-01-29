@@ -1,5 +1,5 @@
-from structures import tree
-import lexer
+from mplisp.structures import tree
+from mplisp import lexer
 
 '''
 (mil 1 2)

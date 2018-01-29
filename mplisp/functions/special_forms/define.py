@@ -1,6 +1,5 @@
 from typing import List
-import functools
-import evaluator
+from mplisp import evaluator
 
 
 def define(args: List, node):
