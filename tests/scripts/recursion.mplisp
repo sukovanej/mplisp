@@ -6,4 +6,14 @@
             1
         )))
 
-(fact 120)
+(fact 20)
+
+(def pow
+    (lambda (a n)
+        (if 
+            (> n 1)
+            (* a (power a (- n 1)))
+            a
+        )))
+
+(pow 2 10)
