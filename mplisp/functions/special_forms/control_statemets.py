@@ -1,5 +1,4 @@
 from typing import List
-import functools
 from mplisp import evaluator
 
 
@@ -30,7 +29,7 @@ def greater_statement(args: List, _):
     return evaluator.evaluate_node(args[0]) > evaluator.evaluate_node(args[1])
 
 
-def equals_statement(args: List, node):
+def equals_statement(args: List, _):
     return evaluator.evaluate_node(args[0]) == evaluator.evaluate_node(args[1])
 
 
@@ -42,5 +41,5 @@ def if_statement(args: List, _):
 
         if condition:
             return evaluator.evaluate_node(args[1])
-        else:
-            return evaluator.evaluate_node(args[2])
+
+        return evaluator.evaluate_node(args[2])

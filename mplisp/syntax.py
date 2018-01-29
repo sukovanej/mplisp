@@ -32,9 +32,9 @@ def syntax(token: str, node: tree.SyntaxTreeNode) -> tree.SyntaxTreeNode:
         return node.append("")
     elif token == ')':
         return node.parent
-    else:
-        node.append(token)
-        return node
+
+    node.append(token)
+    return node
 
 
 def test():

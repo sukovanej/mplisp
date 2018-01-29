@@ -12,7 +12,7 @@ def evaluate(value: str):
 
 
 def evaluate_node(node: tree.SyntaxTreeNode):
-    if len(node.children) == 0:
+    if node.children:
         result = evaluate_symbol(node.value, node.parent)
 
         if result is None:
@@ -43,20 +43,12 @@ def evaluate_symbol(symbol: str, node: tree.SyntaxTreeNode):
         return node.local_env.symbols[symbol]
     elif node.parent is not None:
         return evaluate_symbol(symbol, node.parent)
-    else:
-        return None
+
+    return None
 
 
 def test():
-    import sys
-
-    with open(sys.argv[1]) as f:
-        result = evaluate(f.read())
-
-        for line in result:
-            if line is not None:
-                print(line)
-
+    pass
 
 if __name__ == "__main__":
     test()
