@@ -4,7 +4,7 @@ import evaluator
 import math
 
 
-def minus(args: List, _):
+def minus(args: List, node):
     args = [evaluator.evaluate_node(arg) for arg in args]
 
     if len(args) == 1:

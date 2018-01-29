@@ -18,7 +18,7 @@ def lambda_expression(args: List, node):
                 child.parent = new_node
 
             for i, arg in enumerate(params):
-                new_node.local_env.symbols[arg] = evaluator.evaluate_node(
+                new_node.parent.local_env.symbols[arg] = evaluator.evaluate_node(
                     local_args[i])
 
             return evaluator.evaluate_node(new_node)

@@ -13,4 +13,4 @@ def define(args: List, node):
         node.parent.local_env.symbols[args[0].value] = evaluator.evaluate_node(
             args[1])
 
-        return "[defined new variable " + args[0].value + "]"
+        return None

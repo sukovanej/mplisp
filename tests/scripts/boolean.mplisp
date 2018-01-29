@@ -1,0 +1,11 @@
+(def max 
+    (lambda (a b)
+        (if (> a b) a b)))
+
+(max 2 5)
+
+(def min 
+    (lambda (a b)
+        (if (< a b) a b)))
+
+(min 2 5)

@@ -22,7 +22,6 @@ def evaluate_node(node: tree.SyntaxTreeNode):
 
                 if result == result_int:
                     result = result_int
-
             except ValueError:
                 result = None
         elif isinstance(result, tree.SyntaxTreeNode):
@@ -49,36 +48,14 @@ def evaluate_symbol(symbol: str, node: tree.SyntaxTreeNode):
 
 
 def test():
-    inputs = [
-        "(+ (+ 1 1) 2 3)",
-        "1",
-        "(+ 1 2)",
-        "(- 1 2)",
-        "(* 2 3 4)",
-        "(/ 4 (+ 1 1))",
-        "(- 5)"
-    ]
+    import sys
 
-    expected_outputs = [
-        7,
-        1,
-        3,
-        -1,
-        24,
-        2,
-        -5
-    ]
+    with open(sys.argv[1]) as f:
+        result = evaluate(f.read())
 
-    outputs = list(evaluate('\n'.join(inputs)))
-
-    assert expected_outputs == outputs
-
-    print(list(evaluate("""
-        (def pyth 
-            (lambda (a b)
-                (sqrt (+ (* a a) (* b b)))))
-        (pyth 9 12)
-    """)))
+        for line in result:
+            if line is not None:
+                print(line)
 
 
 if __name__ == "__main__":
