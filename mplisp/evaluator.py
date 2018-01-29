@@ -12,7 +12,7 @@ def evaluate(value: str):
 
 
 def evaluate_node(node: tree.SyntaxTreeNode):
-    if node.children:
+    if not node.children:
         result = evaluate_symbol(node.value, node.parent)
 
         if result is None:
