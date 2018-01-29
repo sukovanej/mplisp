@@ -1,0 +1,10 @@
+(def adder
+    (lambda (incr)
+        (lambda (val) 
+            (+ incr val))))
+
+(def +1 (adder 1))
+(def +2 (adder 2))
+
+(+1 20)
+(+2 20)

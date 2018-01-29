@@ -27,7 +27,7 @@ def create_tree(value: str) -> tree.SyntaxTreeNode:
     return main_node
 
 
-def syntax(token, node: tree.SyntaxTreeNode) -> tree.SyntaxTreeNode:
+def syntax(token: str, node: tree.SyntaxTreeNode) -> tree.SyntaxTreeNode:
     if token == '(':
         return node.append("")
     elif token == ')':
@@ -38,7 +38,7 @@ def syntax(token, node: tree.SyntaxTreeNode) -> tree.SyntaxTreeNode:
 
 
 def test():
-    print(create_tree("1"))
+    assert create_tree("1") == 1
 
 
 if __name__ == "__main__":
