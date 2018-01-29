@@ -6,7 +6,7 @@ cd mplisp
 pip3 install .
 ```
 
-# Run exmaple code
+# Run example code
 
 ```
 mplisp tests/scripts/lambda.mplisp
