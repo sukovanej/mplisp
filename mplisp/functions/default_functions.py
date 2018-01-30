@@ -30,5 +30,6 @@ def get_functions():
 
         "list": lists.create_list,
         "map": lists.map_list,
-        "gen-list": lists.gen_list,
+        "list-gen": lists.gen_list,
+        "list-ref": lists.list_ref,
     }
