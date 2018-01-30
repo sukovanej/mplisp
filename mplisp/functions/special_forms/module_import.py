@@ -12,28 +12,14 @@ def import_module(args: List, node):
         module_name = mplispstd
 
     mod = importlib.import_module(module_name)
-    print(load_module_functions(mod))
+    functions = load_module_functions(mod)
+    node.parent.local_env.symbols.update(functions)
 
-    return module_name
+    return None
 
 
 def load_module_functions(module):
     return inspect.getmembers(module, inspect.isfunction)
-
-
-def load(module):
-    modules = filter(lambda i: isinstance(i, 'module'), [getattr(module, j)\
-        for j in dir(module)])
-
-    result = []
-
-    for mod in modules:
-        if isinstance(mod, 'function'):
-            result.append(mod)
-        elif isinstance(mod, 'module'):
-            result.extend(load(mod))
-    
-    return result
 
 
 def module_exists(module_name):
