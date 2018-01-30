@@ -1,11 +1,15 @@
+""" mlisp basic functions
+"""
 from mplisp.functions.arithmetic import basic
 from mplisp.functions.special_forms import define
 from mplisp.functions.special_forms import lambda_expression
 from mplisp.functions.special_forms import control_statemets
 from mplisp.functions.special_forms import module_import
+from mplisp.functions.list import lists
 
 
 def get_functions():
+    """Gererate basic functions"""
     return {
         "+": basic.plus,
         "-": basic.minus,
@@ -22,5 +26,8 @@ def get_functions():
 
         "def": define.define,
         "lambda": lambda_expression.lambda_expression,
-        "import": module_import.import_module
+        "import": module_import.import_module,
+
+        "list": lists.create_list,
+        "map": lists.map_list
     }

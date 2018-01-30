@@ -12,6 +12,9 @@ def evaluate(value: str):
 
 
 def evaluate_node(node: tree.SyntaxTreeNode):
+    if not isinstance(node, tree.SyntaxTreeNode):
+        return node
+
     if not node.children:
         result = evaluate_symbol(node.value, node.parent)
 
@@ -47,8 +50,7 @@ def evaluate_symbol(symbol: str, node: tree.SyntaxTreeNode):
     return None
 
 
-def test():
-    pass
-
-if __name__ == "__main__":
-    test()
+def error(value: str):
+    """Return error message and exit"""
+    print("[\033[91merror\033[0m: {}]".format(value))
+    quit()
