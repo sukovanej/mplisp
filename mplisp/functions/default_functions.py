@@ -29,5 +29,6 @@ def get_functions():
         "import": module_import.import_module,
 
         "list": lists.create_list,
-        "map": lists.map_list
+        "map": lists.map_list,
+        "gen-list": lists.gen_list,
     }

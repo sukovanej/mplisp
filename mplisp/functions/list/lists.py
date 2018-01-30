@@ -8,6 +8,7 @@ def create_list(args: List, _):
     """Create list"""
     return [evaluator.evaluate_node(arg) for arg in args]
 
+
 def map_list(args: List, node):
     """Map list"""
     if len(args) != 2:
@@ -21,3 +22,9 @@ def map_list(args: List, node):
     arg_list = evaluator.evaluate_node(args[1])
 
     return list(map(lambda x: function([x], node), arg_list))
+
+
+def gen_list(args: List, _):
+    params = [evaluator.evaluate_node(arg) for arg in args]
+
+    return list(range(*params))
