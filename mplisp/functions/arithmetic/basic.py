@@ -11,25 +11,25 @@ def minus(args: List, _):
     if len(args) == 1:
         return -1 * args[0]
 
-    return args[0] - functools.reduce(lambda x, y: x + y, args[1:], 0)
+    return args[0] - functools.reduce(lambda x, y: x + y, args)
 
 
 def plus(args: List, _):
     """Evaluates expression (+ a b c d ...) as {a + b + c + d + ...)}"""
     args = [evaluator.evaluate_node(arg) for arg in args]
-    return functools.reduce(lambda x, y: x + y, args, 0)
+    return functools.reduce(lambda x, y: x + y, args)
 
 
 def multiply(args: List, _):
     """Evaluates expression (* a b c d ...) as {a * b * c * d * ...)}"""
     args = [evaluator.evaluate_node(arg) for arg in args]
-    return functools.reduce(lambda x, y: x * y, args, 1)
+    return functools.reduce(lambda x, y: x * y, args)
 
 
 def divide(args: List, _):
     """Evaluates expression (/ a b c d ...) as {a / (b / (c / (d / ...)..)}"""
     args = [evaluator.evaluate_node(arg) for arg in args]
-    return functools.reduce(lambda x, y: x / y, args[1:], args[0])
+    return functools.reduce(lambda x, y: x / y, args)
 
 
 def sqrt(args: List, _):
