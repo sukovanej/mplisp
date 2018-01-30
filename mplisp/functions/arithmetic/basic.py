@@ -32,4 +32,5 @@ def sqrt(args: List, _):
     if len(args) == 1:
         return math.sqrt(evaluator.evaluate_node(args[0]))
 
-    return "[error: wrong number of arguments, got " + str(len(args)) + ", 1 expected"
+    return ("[error: wrong number of arguments, got {} , 1 expected"
+            .format(str(len(args))))
