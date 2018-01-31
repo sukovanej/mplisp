@@ -1,6 +1,5 @@
 from typing import List
 from mplisp import evaluator
-from mplisp.functions.special_forms.control_statemets import TRUE_STATEMENTS
 
 
 def is_null(args: List, node):
@@ -8,7 +7,7 @@ def is_null(args: List, node):
     if len(args) != 1:
         evaluator.error("1 parameters exptected, {} given".format(len(args)))
 
-    return evaluator.evaluate_symbol(args[0].value, node) is not None
+    return evaluator.evaluate_symbol(args[0].value, node) is None
 
 
 def is_bool(args: List, node):
@@ -16,7 +15,7 @@ def is_bool(args: List, node):
     if len(args) != 1:
         evaluator.error("1 parameters exptected, {} given".format(len(args)))
 
-    return evaluator.evaluate_node(args[0]) in TRUE_STATEMENTS
+    return isinstance(evaluator.evaluate_node(args[0]), bool)
 
 
 def is_list(args: List, node):

@@ -1,3 +1,5 @@
+#!/Users/suk/Projects/mplisp/mplisp.py
+
 (def adder
     (lambda (incr)
         (lambda (val) 
@@ -5,6 +7,12 @@
 
 (def +1 (adder 1))
 (def +2 (adder 2))
+
+(def str "string")
+(and? 1 2)
+(or? 1 2)
+
+(+ 1 2)
 
 (+1 20)
 (+2 20)

@@ -2,6 +2,6 @@
 (def val2 (list 1 2))
 
 (bool? val1)
-(bool? val2)
-(null? val2)
+(list? val2)
 (null? val3)
+(null? (def a 2))
