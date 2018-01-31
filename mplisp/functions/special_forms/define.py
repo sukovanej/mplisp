@@ -4,10 +4,12 @@ from mplisp import evaluator
 
 def define(args: List, node):
     if len(args) != 2:
-        return "[error: wrong number of arguments]"
+        evaluator.error("2 parameters exptected, {} given".format(
+            len(args)
+        ))
     else:
         if args[0].value in node.parent.local_env.symbols:
-            return "[error: " + args[0].value + " already defined]"
+            evaluator.error("{} already defined".format(args[0].value))
 
         node.parent.local_env.symbols[args[0].value] = evaluator.evaluate_node(
             args[1])

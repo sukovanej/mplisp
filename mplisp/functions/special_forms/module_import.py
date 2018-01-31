@@ -7,6 +7,7 @@ from typing import List
 import importlib
 import importlib.util
 import inspect
+from mplisp import evaluator
 
 
 def import_module(args: List, node):
@@ -19,6 +20,8 @@ def import_module(args: List, node):
 
     if module_exists(mplispstd):
         module_name = mplispstd
+    elif not module_exists(module_name):
+        evaluator.error("package {} not found".format(module_name))
 
     mod = importlib.import_module(module_name)
     functions = load_module_functions(mod)

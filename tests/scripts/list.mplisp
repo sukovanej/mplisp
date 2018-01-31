@@ -1,4 +1,4 @@
-(def list1 (list 1 2 3))
+(def list1 (list 1 2 3 4))
 
 (def powers (map (lambda (x) (* x x)) list1))
 (+ list1 powers)
@@ -6,3 +6,17 @@
 (map (lambda (x) (list x (* x x))) (list-gen -5 5))
 
 (list-ref list1 0)
+
+(list-apply + (list-gen 5))
+
+(def fact 
+    (lambda (x)
+        (list-apply * (list-gen 1 (+ x 1)))))
+
+(fact 6)
+
+(list-length list1)
+(enumerate list1)
+
+(def l (list-gen 40))
+(filter (lambda (x) (== 0 (% x 3))) l)

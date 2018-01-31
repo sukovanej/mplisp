@@ -1,3 +1,10 @@
+""" Basic arithmetic operations
+
+Examples:
+(+ 1 2)
+(- 5 (+ 1 2) 1)
+(* 1 2 3 4 5)
+"""
 from typing import List
 import functools
 import math
@@ -34,8 +41,17 @@ def divide(args: List, _):
 
 def sqrt(args: List, _):
     """Evaluates expression (sqrt a) as {sqrt(a)}"""
-    if len(args) == 1:
-        return math.sqrt(evaluator.evaluate_node(args[0]))
+    if len(args) != 1:
+        evaluator.error("wrong number of arguments, got {}, 1 expected".format(
+            str(len(args))))
 
-    return ("[error: wrong number of arguments, got {} , 1 expected"
-            .format(str(len(args))))
+    return math.sqrt(evaluator.evaluate_node(args[0]))
+
+def modulo(args: List, _):
+    """Evaluates expression (sqrt a) as {sqrt(a)}"""
+    if len(args) != 2:
+        evaluator.error("wrong number of arguments, got {}, 2 expected".format(
+            str(len(args))))
+
+    params = [evaluator.evaluate_node(arg) for arg in args]
+    return params[0] % params[1]
