@@ -19,10 +19,14 @@ def get_functions():
         "%": basic.modulo,
         "sqrt": basic.sqrt,
 
+        "#t": True,
+        "#f": False,
+
         "if": control_statemets.if_statement,
         "and?": control_statemets.and_statement,
         "or?": control_statemets.or_statement,
         "==": control_statemets.equals_statement,
+        "!=": control_statemets.equals_statement,
         ">": control_statemets.greater_statement,
         "<": control_statemets.smaller_statement,
 

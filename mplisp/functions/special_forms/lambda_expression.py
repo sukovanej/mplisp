@@ -8,6 +8,7 @@ Examples:
 """
 from typing import List
 import copy
+import concurrent.futures
 from mplisp import evaluator
 
 
@@ -47,9 +48,10 @@ def create_lambda(params, body):
         """Callable object"""
         new_node = copy.deepcopy(body)
 
-        for i, arg in enumerate(params):
-            new_node.local_env.symbols[arg] = evaluator.evaluate_node(
-                local_args[i])
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            for arg, value in zip(params, executor.map(evaluator.evaluate_node,
+                    local_args)):
+                new_node.local_env.symbols.update({arg: value})
 
         return evaluator.evaluate_node(new_node)
 

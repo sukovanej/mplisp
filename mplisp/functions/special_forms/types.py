@@ -10,7 +10,7 @@ def is_null(args: List, node):
     return evaluator.evaluate_symbol(args[0].value, node) is None
 
 
-def is_bool(args: List, node):
+def is_bool(args: List, _):
     """Is value boolean"""
     if len(args) != 1:
         evaluator.error("1 parameters exptected, {} given".format(len(args)))
@@ -18,7 +18,7 @@ def is_bool(args: List, node):
     return isinstance(evaluator.evaluate_node(args[0]), bool)
 
 
-def is_list(args: List, node):
+def is_list(args: List, _):
     """Is value list"""
     if len(args) != 1:
         evaluator.error("1 parameters exptected, {} given".format(len(args)))

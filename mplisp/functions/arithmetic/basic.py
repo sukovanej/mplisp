@@ -13,12 +13,12 @@ from mplisp import evaluator
 
 def minus(args: List, _):
     """Evaluates expression (- a b c d ...) as {a - (b + c + d + ...)}"""
-    args = [evaluator.evaluate_node(arg) for arg in args]
+    params = [evaluator.evaluate_node(arg) for arg in args]
 
-    if len(args) == 1:
-        return -1 * args[0]
+    if len(params) == 1:
+        return -1 * params[0]
 
-    return args[0] - functools.reduce(lambda x, y: x + y, args)
+    return params[0] - functools.reduce(lambda x, y: x + y, params[1:])
 
 
 def plus(args: List, _):

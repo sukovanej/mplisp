@@ -1,6 +1,7 @@
 from mplisp import syntax
 from mplisp.structures import tree
 from mplisp.functions import default_functions
+import concurrent.futures
 
 
 def evaluate(value: str):
@@ -48,6 +49,11 @@ def evaluate_symbol(symbol: str, node: tree.SyntaxTreeNode):
         return evaluate_symbol(symbol, node.parent)
 
     return None
+
+
+def evaluate_parallel_args(args):
+    with concurrent.futures.ProcessPoolExecutor() as executor:
+        return list(executor.map(evaluate_node, args))
 
 
 def error(value: str):
