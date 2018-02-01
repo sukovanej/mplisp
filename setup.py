@@ -6,6 +6,11 @@ setup(
     version='0.2',
     packages=[
         'mplisp',
+        'mplisp.functions',
+        'mplisp.functions.arithmetic',
+        'mplisp.functions.list',
+        'mplisp.functions.special_forms',
+        'mplisp.structures',
     ],
     scripts=[
         "scripts/mplisp"
