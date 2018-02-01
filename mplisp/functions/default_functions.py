@@ -26,7 +26,7 @@ def get_functions():
         "and?": control_statemets.and_statement,
         "or?": control_statemets.or_statement,
         "==": control_statemets.equals_statement,
-        "!=": control_statemets.equals_statement,
+        "!=": control_statemets.not_equals_statement,
         ">": control_statemets.greater_statement,
         "<": control_statemets.smaller_statement,
 

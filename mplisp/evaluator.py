@@ -9,6 +9,9 @@ def evaluate(value: str):
     syntax_tree.local_env.symbols = default_functions.get_functions()
 
     for node in syntax_tree.children:
+        if node.value and node.value[0] == "#":
+            continue
+
         yield evaluate_node(node)
 
 

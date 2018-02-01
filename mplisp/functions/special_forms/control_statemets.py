@@ -34,7 +34,7 @@ def greater_statement(args: List, _):
 
 
 def not_equals_statement(args: List, _):
-    """Evaluate (== a b) as {a == b}"""
+    """Evaluate (!= a b) as {a != b}"""
     return evaluator.evaluate_node(args[0]) != evaluator.evaluate_node(args[1])
 
 
