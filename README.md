@@ -118,4 +118,20 @@ functions for basic arithmetic:
 An expression can be evaluated to *bool*. `False`, `#f` and `0` are
 evaluated to *false* and every other value is evaluated to *true*.
 
+```lisp
+mplisp> #t
+-> True
+mplisp> #f
+-> False
+```
+
+An expression can be converted to *bool* using ```->bool?``` function.
+
+```lisp
+mplisp> (->bool? 3)
+-> True
+mplisp> (->bool? 0)
+-> False
+```
+
 

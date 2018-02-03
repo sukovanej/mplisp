@@ -25,21 +25,41 @@ def or_statement(args: List, _):
 
 def smaller_statement(args: List, _):
     """Evaluate (< a b) as {a < b}"""
+    if len(args) != 2:
+        evaluator.error("2 parameters expected, {} given".format(len(args)))
+
     return evaluator.evaluate_node(args[0]) < evaluator.evaluate_node(args[1])
+
+
+def not_statement(args: List, _):
+    """Evaluate (< a b) as {a < b}"""
+    if len(args) != 1:
+        evaluator.error("1 parameter expected, {} given".format(len(args)))
+
+    return evaluator.evaluate_node(args[0]) in FALSE_STATEMENTS
 
 
 def greater_statement(args: List, _):
     """Evaluate (> a b) as {a > b}"""
+    if len(args) != 2:
+        evaluator.error("2 parameters expected, {} given".format(len(args)))
+
     return evaluator.evaluate_node(args[0]) > evaluator.evaluate_node(args[1])
 
 
 def not_equals_statement(args: List, _):
     """Evaluate (!= a b) as {a != b}"""
+    if len(args) != 2:
+        evaluator.error("2 parameters expected, {} given".format(len(args)))
+
     return evaluator.evaluate_node(args[0]) != evaluator.evaluate_node(args[1])
 
 
 def equals_statement(args: List, _):
     """Evaluate (== a b) as {a == b}"""
+    if len(args) != 2:
+        evaluator.error("2 parameters expected, {} given".format(len(args)))
+
     return evaluator.evaluate_node(args[0]) == evaluator.evaluate_node(args[1])
 
 
