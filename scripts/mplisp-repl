@@ -1,0 +1,20 @@
+#!/usr/bin/env python3
+from mplisp import evaluator
+from mplisp.structures import env
+from mplisp.functions import default_functions
+
+
+def main():
+    global_env = env.EnvNode(default_functions.get_functions())
+    while True:
+        value = input(" mplisp> ")
+
+        try:
+            for val in evaluator.evaluate(value, global_env):
+                print(" -> {}".format(val))
+        except ValueError as e:
+            print(e.args[0])
+
+
+if __name__ == "__main__":
+    main()
