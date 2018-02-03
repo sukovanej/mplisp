@@ -1,6 +1,7 @@
 from typing import List
 from . import env
 
+
 class SyntaxTreeNode(object):
     def __init__(self, value: str, children: List,
                  parent, local_env: env.EnvNode = None):

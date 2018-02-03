@@ -6,6 +6,7 @@ from mplisp.functions.special_forms import lambda_expression
 from mplisp.functions.special_forms import control_statemets
 from mplisp.functions.special_forms import module_import
 from mplisp.functions.special_forms import types
+from mplisp.functions.special_forms import assert_value
 from mplisp.functions.list import lists
 
 
@@ -49,4 +50,7 @@ def get_functions():
         "length": lists.list_length,
 
         "enumerate": lists.enumerate_list,
+
+        "assert!": assert_value.assert_value,
+        "assert-equal!": assert_value.assert_equal
     }

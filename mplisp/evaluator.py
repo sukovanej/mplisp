@@ -31,7 +31,7 @@ def evaluate_node(node: tree.SyntaxTreeNode):
                 if result == result_int:
                     result = result_int
             except ValueError:
-                result = None
+                error("{} not found".format(node.value))
         elif isinstance(result, tree.SyntaxTreeNode):
             result = evaluate_node(result)
     else:
@@ -58,11 +58,13 @@ def evaluate_symbol(symbol: str, node: tree.SyntaxTreeNode):
 
 def evaluate_parallel_args(args):
     """Evaluate args in parallel"""
-    with concurrent.futures.ProcessPoolExecutor() as executor:
-        return list(executor.map(evaluate_node, args))
+    #with concurrent.futures.ProcessPoolExecutor() as executor:
+    #    return list(executor.map(evaluate_node, args))
+
+    return list(map(evaluate_node, args))
 
 
 def error(value: str):
     """Return error message and exit"""
-    print("[\033[91m error \033[0m: {}]".format(value))
+    print("[\033[91m error \033[0m: {} ]".format(value))
     quit()

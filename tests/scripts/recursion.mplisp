@@ -1,3 +1,4 @@
+#!/usr/local/bin/mplisp
 (def fact
     (lambda (x) 
         (if 
@@ -6,7 +7,17 @@
             1
         )))
 
-(fact 20)
+(def val1 (fact 1))
+(def val2 (fact 2))
+(def val3 (fact 3))
+(def val4 (fact 4))
+(def val5 (fact 5))
+
+(assert-equal! val1 1)
+(assert-equal! val2 2)
+(assert-equal! val3 6)
+(assert-equal! val4 24)
+(assert-equal! val5 120)
 
 (def pow
     (lambda (a n)
@@ -16,4 +27,26 @@
             a
         )))
 
-(pow 2 10)
+(def val11 (pow 2 1))
+(def val12 (pow 2 2))
+(def val13 (pow 2 3))
+(def val14 (pow 2 4))
+(def val15 (pow 2 5))
+(def val16 (pow 2 6))
+(def val17 (pow 2 7))
+(def val18 (pow 2 8))
+(def val19 (pow 2 9))
+(def val110 (pow 3 1))
+(def val111 (pow 3 2))
+
+(assert-equal! val11 2)
+(assert-equal! val12 4)
+(assert-equal! val13 8)
+(assert-equal! val14 16)
+(assert-equal! val15 32)
+(assert-equal! val16 64)
+(assert-equal! val17 128)
+(assert-equal! val18 256)
+(assert-equal! val19 512)
+(assert-equal! val110 3)
+(assert-equal! val111 9)

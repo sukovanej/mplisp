@@ -27,13 +27,13 @@ pip3 install .
 Generating x^2 function
 
 ```lisp
-(map (lambda (x) (list x (* x x))) (list-gen -5 5))
+(map (lambda (x) (list x (* x x))) (range -5 5))
 ```
 
 Apply list values as function arguments
 
 ```lisp
-(apply + (list-gen 20))
+(apply + (range 20))
 ```
 
 ## Run example code

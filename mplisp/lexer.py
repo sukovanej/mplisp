@@ -15,11 +15,23 @@ EXAMPLES:
 def lexer(value):
     """Yield token"""
     buffer = list()
+    last = ''
+    state = ''
+
     for ch in value:
+        if last == '\n' and ch == '#':
+            state = 'comment'
+
+        if state == 'comment':
+            if ch == '\n':
+                state = 'normal'
+
+            continue
 
         if ch == '(':
             yield ch
         elif ch in (' ', '\n', ')'):
+
             if buffer:
                 yield ''.join(buffer)
                 buffer = list()
@@ -28,6 +40,8 @@ def lexer(value):
                 yield ch
         else:
             buffer.append(ch)
+
+        last = ch
 
     if buffer:
         yield ''.join(buffer)

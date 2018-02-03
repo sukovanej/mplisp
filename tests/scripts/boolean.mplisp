@@ -1,11 +1,33 @@
+#!/usr/local/bin/mplisp
 (def max 
     (lambda (a b)
         (if (> a b) a b)))
 
-(max 2 5)
+(def val1 (max 2 5))
+(def val2 (max 3 5))
+(def val3 (max 4 5))
+(def val4 (max 5 5))
+(def val5 (max 6 5))
+
+(assert! (== val1 5))
+(assert! (== val2 5))
+(assert! (== val3 5))
+(assert! (== val4 5))
+(assert! (== val5 6))
 
 (def min 
     (lambda (a b)
         (if (< a b) a b)))
 
-(min 2 5)
+(def val6 (min 2 5))
+(def val7 (min 3 5))
+(def val8 (min 4 5))
+(def val9 (min 5 5))
+(def val10 (min 6 5))
+
+(assert! (== val6 2))
+(assert! (== val7 3))
+(assert! (== val8 4))
+(assert! (== val9 5))
+(assert! (== val10 5))
+(assert! (== val10 5))

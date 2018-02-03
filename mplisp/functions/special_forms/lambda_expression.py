@@ -15,7 +15,7 @@ from mplisp import evaluator
 def lambda_expression(args: List, node):
     """Return lambda expression"""
     if len(args) != 2:
-        evaluator.error("2 parameters exptected, {} given".format(len(args)))
+        evaluator.error("2 parameters expected, {} given".format(len(args)))
 
     params = [arg.value for arg in args[0].children]
     return create_lambda(params, node.children[2])
@@ -24,7 +24,9 @@ def lambda_expression(args: List, node):
 def let_expression(args: List, node):
     """Return let expression"""
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        set_env = lambda x: (x, evaluator.evaluate_node(x.children[1]))
+        def set_env(x):
+            (x, evaluator.evaluate_node(x.children[1]))
+
         for name, value in executor.map(set_env, args[0].children):
             node.local_env.symbols[name.children[0].value] = value
 
@@ -47,10 +49,8 @@ def create_lambda(params, body):
         """Callable object"""
         new_node = copy.deepcopy(body)
 
-        with concurrent.futures.ThreadPoolExecutor() as executor:
-            for arg, value in zip(params, executor.map(evaluator.evaluate_node,
-                                                       local_args)):
-                new_node.local_env.symbols[arg] = value
+        for arg, value in zip(params, local_args):
+                new_node.local_env.symbols[arg] = evaluator.evaluate_node(value)
 
         return evaluator.evaluate_node(new_node)
 
