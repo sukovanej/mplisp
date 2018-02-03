@@ -3,15 +3,14 @@ from mplisp import evaluator
 
 
 def define(args: List, node):
+    """create new name->symbol connection"""
     if len(args) != 2:
-        evaluator.error("2 parameters exptected, {} given".format(
-            len(args)
-        ))
-    else:
-        if args[0].value in node.parent.local_env.symbols:
-            evaluator.error("{} already defined".format(args[0].value))
+        evaluator.error("2 parameters expected, {} given".format(len(args)))
 
-        node.parent.local_env.symbols[args[0].value] = evaluator.evaluate_node(
-            args[1])
+    if args[0].value in node.parent.local_env.symbols:
+        evaluator.error("{} already defined".format(args[0].value))
 
-        return None
+    node.parent.local_env.symbols[args[0].value] = evaluator.evaluate_node(
+        args[1])
+
+    return None

@@ -13,7 +13,7 @@ from mplisp import evaluator
 
 def minus(args: List, _):
     """Evaluates expression (- a b c d ...) as {a - (b + c + d + ...)}"""
-    params = [evaluator.evaluate_node(arg) for arg in args]
+    params = evaluator.evaluate_parallel_args(args)
 
     if len(params) == 1:
         return -1 * params[0]
@@ -23,20 +23,20 @@ def minus(args: List, _):
 
 def plus(args: List, _):
     """Evaluates expression (+ a b c d ...) as {a + b + c + d + ...)}"""
-    args = [evaluator.evaluate_node(arg) for arg in args]
-    return functools.reduce(lambda x, y: x + y, args)
+    params = evaluator.evaluate_parallel_args(args)
+    return functools.reduce(lambda x, y: x + y, params)
 
 
 def multiply(args: List, _):
     """Evaluates expression (* a b c d ...) as {a * b * c * d * ...)}"""
-    args = [evaluator.evaluate_node(arg) for arg in args]
-    return functools.reduce(lambda x, y: x * y, args)
+    params = evaluator.evaluate_parallel_args(args)
+    return functools.reduce(lambda x, y: x * y, params)
 
 
 def divide(args: List, _):
     """Evaluates expression (/ a b c d ...) as {a / (b / (c / (d / ...)..)}"""
-    args = [evaluator.evaluate_node(arg) for arg in args]
-    return functools.reduce(lambda x, y: x / y, args)
+    params = evaluator.evaluate_parallel_args(args)
+    return functools.reduce(lambda x, y: x / y, params)
 
 
 def sqrt(args: List, _):
@@ -53,5 +53,5 @@ def modulo(args: List, _):
         evaluator.error("wrong number of arguments, got {}, 2 expected".format(
             str(len(args))))
 
-    params = [evaluator.evaluate_node(arg) for arg in args]
+    params = evaluator.evaluate_parallel_args(args)
     return params[0] % params[1]

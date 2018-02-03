@@ -10,7 +10,7 @@ from mplisp.functions.list import lists
 
 
 def get_functions():
-    """Gererate basic functions"""
+    """Generate basic functions"""
     return {
         "+": basic.plus,
         "-": basic.minus,
@@ -43,10 +43,10 @@ def get_functions():
         "list": lists.create_list,
         "map": lists.map_list,
         "filter": lists.filter_list,
-        "list-gen": lists.gen_list,
+        "range": lists.gen_list,
         "list-ref": lists.list_ref,
-        "list-apply": lists.list_apply,
-        "list-length": lists.list_length,
+        "apply": lists.list_apply,
+        "length": lists.list_length,
 
         "enumerate": lists.enumerate_list,
     }

@@ -6,7 +6,7 @@ from mplisp import evaluator
 
 def create_list(args: List, _):
     """Create list"""
-    return [evaluator.evaluate_node(arg) for arg in args]
+    return evaluator.evaluate_parallel_args(args)
 
 
 def map_list(args: List, node):
@@ -14,19 +14,19 @@ def map_list(args: List, node):
     if len(args) != 2:
         evaluator.error("2 parameters expected, {} given.".format(len(args)))
 
-    function = evaluator.evaluate_node(args[0])
+    function_object = evaluator.evaluate_node(args[0])
 
-    if not callable(function):
+    if not callable(function_object):
         evaluator.error("map function is not callable")
 
     arg_list = evaluator.evaluate_node(args[1])
 
-    return list(map(lambda x: function([x], node), arg_list))
+    return list(map(lambda x: function_object([x], node), arg_list))
 
 
 def gen_list(args: List, _):
     """get range(*params)"""
-    params = [evaluator.evaluate_node(arg) for arg in args]
+    params = evaluator.evaluate_parallel_args(args)
 
     return list(range(*params))
 
@@ -37,7 +37,7 @@ def list_ref(args: List, _):
     if len(args) != 2:
         evaluator.error("2 parameters expected, {} given.".format(len(args)))
 
-    params = [evaluator.evaluate_node(arg) for arg in args]
+    params = evaluator.evaluate_parallel_args(args)
 
     if not isinstance(params[0], list):
         evaluator.error("1st parameter must be of type list")
@@ -50,14 +50,15 @@ def list_ref(args: List, _):
 
     return params[0][params[1]]
 
+
 def list_apply(args: List, node):
-    """Evalute function on params given by list"""
+    """Evaluate function on params given by list"""
     if len(args) != 2:
         evaluator.error("2 parameters expected, {} given.".format(len(args)))
 
-    function = evaluator.evaluate_node(args[0])
+    function_object = evaluator.evaluate_node(args[0])
 
-    if not callable(function):
+    if not callable(function_object):
         evaluator.error("apply function is not callable")
 
     arg_list = evaluator.evaluate_node(args[1])
@@ -65,7 +66,7 @@ def list_apply(args: List, node):
     if not isinstance(arg_list, list):
         evaluator.error("apply function is not callable")
 
-    return function(arg_list, node)
+    return function_object(arg_list, node)
 
 
 def list_length(args: List, _):
@@ -79,7 +80,7 @@ def list_length(args: List, _):
 
 
 def enumerate_list(args: List, _):
-    """pythonic enumerate equiv."""
+    """Python enumerate equiv."""
     value = evaluator.evaluate_node(args[0])
 
     if not isinstance(value, list):
@@ -93,11 +94,11 @@ def filter_list(args: List, node):
     if len(args) != 2:
         evaluator.error("2 parameters expected, {} given.".format(len(args)))
 
-    function = evaluator.evaluate_node(args[0])
+    function_object = evaluator.evaluate_node(args[0])
 
-    if not callable(function):
+    if not callable(function_object):
         evaluator.error("map function is not callable")
 
     arg_list = evaluator.evaluate_node(args[1])
 
-    return list(filter(lambda x: function([x], node), arg_list))
+    return list(filter(lambda x: function_object([x], node), arg_list))

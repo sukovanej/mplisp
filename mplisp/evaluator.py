@@ -5,11 +5,12 @@ import concurrent.futures
 
 
 def evaluate(value: str):
+    """Evaluate input"""
     syntax_tree = syntax.create_tree(value)
     syntax_tree.local_env.symbols = default_functions.get_functions()
 
     for node in syntax_tree.children:
-        if node.value and node.value[0] == "#":
+        if node.value and node.value[0] == "#":  # comments
             continue
 
         yield evaluate_node(node)
@@ -46,6 +47,7 @@ def evaluate_node(node: tree.SyntaxTreeNode):
 
 
 def evaluate_symbol(symbol: str, node: tree.SyntaxTreeNode):
+    """Evaluate symbol"""
     if symbol in node.local_env.symbols:
         return node.local_env.symbols[symbol]
     elif node.parent is not None:
@@ -55,11 +57,12 @@ def evaluate_symbol(symbol: str, node: tree.SyntaxTreeNode):
 
 
 def evaluate_parallel_args(args):
+    """Evaluate args in parallel"""
     with concurrent.futures.ProcessPoolExecutor() as executor:
         return list(executor.map(evaluate_node, args))
 
 
 def error(value: str):
     """Return error message and exit"""
-    print("[\033[91merror\033[0m: {}]".format(value))
+    print("[\033[91m error \033[0m: {}]".format(value))
     quit()

@@ -1,7 +1,7 @@
 from mplisp.structures import tree
 from mplisp import lexer
 
-'''
+"""
 (mil 1 2)
 ""
     -> mil
@@ -14,10 +14,11 @@ from mplisp import lexer
         -> 2
         -> 3
     -> petr
-'''
+"""
 
 
 def create_tree(value: str) -> tree.SyntaxTreeNode:
+    """create the whole tree"""
     main_node = tree.SyntaxTreeNode("", [], None)
     actual_node = main_node
 
@@ -28,6 +29,7 @@ def create_tree(value: str) -> tree.SyntaxTreeNode:
 
 
 def syntax(token: str, node: tree.SyntaxTreeNode) -> tree.SyntaxTreeNode:
+    """create node"""
     if token == '(':
         return node.append("")
     elif token == ')':
@@ -35,11 +37,3 @@ def syntax(token: str, node: tree.SyntaxTreeNode) -> tree.SyntaxTreeNode:
 
     node.append(token)
     return node
-
-
-def test():
-    assert create_tree("1") == 1
-
-
-if __name__ == "__main__":
-    test()

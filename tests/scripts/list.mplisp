@@ -7,15 +7,15 @@
 
 (list-ref list1 0)
 
-(list-apply + (list-gen 5))
+(apply + (list-gen 5))
 
 (def fact 
     (lambda (x)
-        (list-apply * (list-gen 1 (+ x 1)))))
+        (apply * (list-gen 1 (+ x 1)))))
 
 (fact 6)
 
-(list-length list1)
+(length list1)
 (enumerate list1)
 
 (def l (list-gen 40))
