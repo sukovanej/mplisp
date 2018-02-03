@@ -3,6 +3,12 @@
     (lambda (a b)
         (if (> a b) a b)))
 
+(assert-equal! #t (->bool? 1))
+(assert-equal! #t (->bool? 2))
+(assert-equal! #t (->bool? 3))
+(assert-equal! #t (->bool? 4))
+(assert-equal! #f (->bool? 0))
+
 (def val1 (max 2 5))
 (def val2 (max 3 5))
 (def val3 (max 4 5))
@@ -15,7 +21,7 @@
 (assert! (== val4 5))
 (assert! (== val5 6))
 
-(def min 
+(def min
     (lambda (a b)
         (if (< a b) a b)))
 

@@ -1,5 +1,6 @@
 from typing import List
 from mplisp import evaluator
+from mplisp.functions.special_forms.control_statemets import FALSE_STATEMENTS
 
 
 def is_null(args: List, node):
@@ -25,3 +26,11 @@ def is_list(args: List, _):
 
     return isinstance(evaluator.evaluate_node(args[0]), list)
 
+
+def to_bool(args: List, _):
+    """Convert expression to its boolean value"""
+    if len(args) != 1:
+        evaluator.error("1 parameters expected, {} given".format(len(args)))
+
+    value = evaluator.evaluate_node(args[0])
+    return value not in FALSE_STATEMENTS

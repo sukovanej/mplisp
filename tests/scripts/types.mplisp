@@ -6,3 +6,5 @@
 (assert! (list? val2))
 (assert! (null? val3))
 (assert! (null? (def a 2)))
+
+(assert-equal! #t (->bool? 20))

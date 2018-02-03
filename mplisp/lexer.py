@@ -19,7 +19,7 @@ def lexer(value):
     state = ''
 
     for ch in value:
-        if last == '\n' and ch == '#':
+        if last == '\n' and ch == ';':
             state = 'comment'
 
         if state == 'comment':

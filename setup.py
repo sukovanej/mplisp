@@ -3,7 +3,7 @@ from distutils.core import setup
 
 setup(
     name='mplisp',
-    version='0.2',
+    version='0.3',
     packages=[
         'mplisp',
         'mplisp.functions',
@@ -13,7 +13,8 @@ setup(
         'mplisp.structures',
     ],
     scripts=[
-        "scripts/mplisp"
+        "scripts/mplisp",
+        "scripts/mplisp-repl"
     ],
     install_requires=[
     ]

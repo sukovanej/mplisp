@@ -4,13 +4,16 @@ from mplisp.functions import default_functions
 import concurrent.futures
 
 
-def evaluate(value: str):
+def evaluate(value: str, env=None):
     """Evaluate input"""
     syntax_tree = syntax.create_tree(value)
-    syntax_tree.local_env.symbols = default_functions.get_functions()
+    if env is None:
+        syntax_tree.local_env.symbols = default_functions.get_functions()
+    else:
+        syntax_tree.local_env = env
 
     for node in syntax_tree.children:
-        if node.value and node.value[0] == "#":  # comments
+        if node.value and node.value.startswith('#!'):  # shebang
             continue
 
         yield evaluate_node(node)
@@ -40,8 +43,7 @@ def evaluate_node(node: tree.SyntaxTreeNode):
         if callable(func):
             result = func(node.children[1:], node)
         else:
-            print("[error: '" + node.children[0].value + "' is not callable]")
-            quit()
+            error("{} is not callable".format(node.children[0].value))
 
     return result
 
@@ -61,10 +63,7 @@ def evaluate_parallel_args(args):
     with concurrent.futures.ThreadPoolExecutor() as executor:
         return list(executor.map(evaluate_node, args))
 
-    # return list(map(evaluate_node, args))
-
 
 def error(value: str):
     """Return error message and exit"""
-    print("[\033[91m error \033[0m: {} ]".format(value))
-    quit()
+    raise ValueError("[\033[91m error \033[0m: {} ]".format(value))
