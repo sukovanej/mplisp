@@ -40,7 +40,6 @@ Apply list values as function arguments
 
 ```bash
 ./test/run.sh
-...
 ```
 
 ## Specification

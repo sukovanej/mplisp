@@ -24,7 +24,8 @@ def import_module(args: List, node):
         evaluator.error("package {} not found".format(module_name))
 
     mod = importlib.import_module(module_name)
-    functions = load_module_functions(mod)
+
+    functions = {name.replace("_", "-"): func for name, func in load_module_functions(mod)}
     node.parent.local_env.symbols.update(functions)
 
     return None
