@@ -113,7 +113,7 @@ functions for basic arithmetic:
 - ```/``` divide
 - ```%``` modulo
 
-### Control statements, boolean algebra
+### Boolean
 
 An expression can be evaluated to *bool*. `False`, `#f` and `0` are
 evaluated to *false* and every other value is evaluated to *true*.
@@ -134,4 +134,50 @@ mplisp> (->bool? 0)
 -> False
 ```
 
+Type can be checked using ```bool?``` function.
 
+```lip
+mplisp> (bool? 0)
+-> False
+mplisp> (bool? #t)
+-> True
+mplisp> (bool? 1)
+-> False
+mplisp> (bool? #f)
+-> True
+mplisp> (bool? (->bool? 1))
+-> True
+```
+
+Binary logical operators:
+
+ - ```(and? a b)``` returns *a and b*
+ - ```(or? a b)``` returns *a or b*
+ - ```(== a b)``` returns *a equals b*
+ - ```(!= a b)``` returns *a doesnt equal b*
+ - ```(> a b)``` returns *a is greater than b*
+ - ```(< a b)``` returns *a is smaller than b*
+ 
+Unary logical operators:
+
+ - ```(not? a)``` returns *a is ```#f```*
+
+### Control statement
+
+```if``` form evaluates an expression depending on the condition. General form is
+
+```lisp
+(if condition expr1 expr2)
+```
+
+If the condition is evaluated to *true*, `expr1` is evaluated, otherwise `expr2` is.
+Simple example is `max` function.
+
+```lisp
+mplisp> (def max (lambda (a b) (if (> a b) a b)))
+-> None
+mplisp> (max 1 2)
+-> 2
+mplisp> (max 2 1)
+-> 2
+```
