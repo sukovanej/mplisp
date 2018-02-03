@@ -1,2 +1,3 @@
+#!/usr/local/bin/mplisp
 (import std.io.petr)
 (hellopetr)

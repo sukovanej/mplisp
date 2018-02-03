@@ -1,7 +1,8 @@
+#!/usr/local/bin/mplisp
 (def val1 (and? 1 2))
 (def val2 (list 1 2))
 
-(bool? val1)
-(list? val2)
-(null? val3)
-(null? (def a 2))
+(assert! (bool? val1))
+(assert! (list? val2))
+(assert! (null? val3))
+(assert! (null? (def a 2)))

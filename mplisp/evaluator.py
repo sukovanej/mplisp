@@ -58,10 +58,10 @@ def evaluate_symbol(symbol: str, node: tree.SyntaxTreeNode):
 
 def evaluate_parallel_args(args):
     """Evaluate args in parallel"""
-    #with concurrent.futures.ProcessPoolExecutor() as executor:
-    #    return list(executor.map(evaluate_node, args))
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        return list(executor.map(evaluate_node, args))
 
-    return list(map(evaluate_node, args))
+    # return list(map(evaluate_node, args))
 
 
 def error(value: str):

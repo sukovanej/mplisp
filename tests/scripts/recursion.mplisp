@@ -27,6 +27,10 @@
             a
         )))
 
+(def pow-with-list
+    (lambda (a n)
+        (apply * (map (lambda (x) a) (range n)))))
+
 (def val11 (pow 2 1))
 (def val12 (pow 2 2))
 (def val13 (pow 2 3))

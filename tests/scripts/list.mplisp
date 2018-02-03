@@ -1,22 +1,12 @@
+#!/usr/local/bin/mplisp
 (def list1 (list 1 2 3 4))
-
 (def powers (map (lambda (x) (* x x)) list1))
+
 (+ list1 powers)
 (map sqrt (list 1 2 3 4 5 6 7))
-(map (lambda (x) (list x (* x x))) (list-gen -5 5))
-
+(map (lambda (x) (list x (* x x))) (range -5 5))
 (list-ref list1 0)
-
-(apply + (list-gen 5))
-
-(def fact 
-    (lambda (x)
-        (apply * (list-gen 1 (+ x 1)))))
-
-(fact 6)
-
+(apply + (range 5))
 (length list1)
 (enumerate list1)
-
-(def l (list-gen 40))
-(filter (lambda (x) (== 0 (% x 3))) l)
+(filter (lambda (x) (== 0 (% x 3))) (range 40))
