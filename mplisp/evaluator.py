@@ -1,7 +1,10 @@
+from functools import reduce
+import concurrent.futures
+
 from mplisp import syntax
 from mplisp.structures import tree
 from mplisp.functions import default_functions
-import concurrent.futures
+from mplisp.lexer import STR_SURROUND
 
 
 def evaluate(value: str, env=None):
@@ -27,6 +30,8 @@ def evaluate_node(node: tree.SyntaxTreeNode):
         result = evaluate_symbol(node.value, node.parent)
 
         if result is None:
+            if reduce(lambda a, b: a and b, [node.value.startswith(x) for x in STR_SURROUND]):
+
             try:
                 result = float(node.value)
                 result_int = int(result)

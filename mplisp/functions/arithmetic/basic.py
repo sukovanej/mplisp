@@ -47,6 +47,7 @@ def sqrt(args: List, _):
 
     return math.sqrt(evaluator.evaluate_node(args[0]))
 
+
 def modulo(args: List, _):
     """Evaluates expression (sqrt a) as {sqrt(a)}"""
     if len(args) != 2:

@@ -12,13 +12,18 @@ EXAMPLES:
 """
 
 
+STR_SURROUND = ["\"", "'"]
+ESCAPE_CHAR = "\\"
+
+
 def lexer(value):
     """Yield token"""
     buffer = list()
     last = ''
-    state = ''
+    state = 'normal'
 
     for ch in value:
+        # comment
         if last == '\n' and ch == ';':
             state = 'comment'
 
@@ -28,6 +33,18 @@ def lexer(value):
 
             continue
 
+        # string
+        if ch in STR_SURROUND and last != ESCAPE_CHAR:
+            if state == 'normal':
+                state = 'string'
+            elif state == 'normal':
+                state = 'normal'
+
+        if state == 'string':
+            buffer.append(ch)
+            continue
+
+        # normal
         if ch == '(':
             yield ch
         elif ch in (' ', '\n', ')'):
