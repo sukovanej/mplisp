@@ -30,16 +30,17 @@ def evaluate_node(node: tree.SyntaxTreeNode):
         result = evaluate_symbol(node.value, node.parent)
 
         if result is None:
-            if reduce(lambda a, b: a and b, [node.value.startswith(x) for x in STR_SURROUND]):
+            if node.value[0] in STR_SURROUND and node.value[len(node.value) - 1] == node.value[0]:
+                result = str(node.value[1:-1])
+            else:
+                try:
+                    result = float(node.value)
+                    result_int = int(result)
 
-            try:
-                result = float(node.value)
-                result_int = int(result)
-
-                if result == result_int:
-                    result = result_int
-            except ValueError:
-                error("{} not found".format(node.value))
+                    if result == result_int:
+                        result = result_int
+                except ValueError:
+                    error("{} not found".format(node.value))
         elif isinstance(result, tree.SyntaxTreeNode):
             result = evaluate_node(result)
     else:
