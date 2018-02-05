@@ -27,7 +27,7 @@ def evaluate_node(node: tree.SyntaxTreeNode):
         return node
 
     if not node.children:
-        result = evaluate_symbol(node.value, node.parent)
+        result = evaluate_symbol(node.value, node)
 
         if result is None:
             if node.value[0] in STR_SURROUND and node.value[len(node.value) - 1] == node.value[0]:
