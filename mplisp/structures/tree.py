@@ -8,11 +8,7 @@ class SyntaxTreeNode(object):
         self.value = value
         self.children = children
         self.parent = parent
-
-        if local_env is None:
-            self.local_env = env.EnvNode({})
-        else:
-            self.local_env = local_env
+        self.local_env = local_env
 
     def append(self, value):
         node = SyntaxTreeNode(value, [], self)

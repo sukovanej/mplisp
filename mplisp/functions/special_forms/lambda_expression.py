@@ -9,6 +9,7 @@ Examples:
 from typing import List
 import copy
 import concurrent.futures
+from mplisp.structures import env
 from mplisp import evaluator
 
 
@@ -48,9 +49,10 @@ def create_lambda(params, body):
     def func(local_args: List, _):
         """Callable object"""
         new_node = copy.deepcopy(body)
+        new_node.local_env = env.EnvNode({})
 
         for arg, value in zip(params, local_args):
-                new_node.local_env.symbols[arg] = evaluator.evaluate_node(value)
+            new_node.local_env.symbols[arg] = evaluator.evaluate_node(value)
 
         return evaluator.evaluate_node(new_node)
 
