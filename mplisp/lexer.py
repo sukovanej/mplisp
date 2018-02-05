@@ -37,7 +37,7 @@ def lexer(value):
         if ch in STR_SURROUND and last != ESCAPE_CHAR:
             if state == 'normal':
                 state = 'string'
-            elif state == 'normal':
+            elif state == 'string':
                 state = 'normal'
 
         if state == 'string':
