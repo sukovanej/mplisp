@@ -9,8 +9,11 @@ class TestLexer(unittest.TestCase):
         input1 = "(def a 'str')"
         input2 = "(def a \"str\")"
 
-        output1 = lexer.lexer(input1)
-        output2 = lexer.lexer(input2)
+        output1 = list(lexer.lexer(input1))
+        output2 = list(lexer.lexer(input2))
 
-        print(list(output1))
-        print(list(output2))
+        output_expected_1 = ['(', 'def', 'a', '\'str\'', ')']
+        output_expected_2 = ['(', 'def', 'a', '\"str\"', ')']
+
+        self.assertEqual(output1, output_expected_1)
+        self.assertEqual(output2, output_expected_2)
