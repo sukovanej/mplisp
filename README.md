@@ -180,3 +180,17 @@ mplisp> (max 1 2)
 mplisp> (max 2 1)
 -> 2
 ```
+
+
+### Strings
+
+String are recognized by apostrophe (`'` or `"`). For example
+
+```lisp
+mplisp> "hello world"
+-> hello world
+mplisp> 'hello world'
+-> hello world
+mplisp> hello world
+[ error : hello not found ]
+```
