@@ -13,7 +13,7 @@ from mplisp import evaluator
 def import_module(args: List, node):
     """
     Import all functions from a module and add corresponding symbols
-    to the parent enviroment.
+    to the parent environment.
     """
     module_name = args[0].value
     mplispstd = module_name.replace("std", "mplispstd")
