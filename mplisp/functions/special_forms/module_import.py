@@ -3,6 +3,7 @@
 Exmaples:
 (import std.io.petr)
 """
+from types import ModuleType
 from typing import List
 import importlib
 import importlib.util
@@ -15,7 +16,11 @@ def import_module(args: List, node):
     Import all functions from a module and add corresponding symbols
     to the parent environment.
     """
-    module_name = args[0].value
+    module_name = evaluator.evaluate_node(args[0])
+
+    if not isinstance(module_name, str):
+        evaluator.error("1st param must be of type str")
+
     mplispstd = module_name.replace("std", "mplispstd")
 
     if module_exists(mplispstd):
@@ -26,9 +31,30 @@ def import_module(args: List, node):
     mod = importlib.import_module(module_name)
 
     functions = {name.replace("_", "-"): func for name, func in load_module_functions(mod)}
-    node.parent.local_env.symbols.update(functions)
+    inst = node.parent
 
-    return None
+    while inst.local_env is None:
+        inst = inst.parent
+
+    inst.local_env.symbols.update(functions)
+
+    return mod
+
+
+def python_getattr(args: List, node):
+    """Call python function from mplisp"""
+    if len(args) != 2:
+        evaluator.error("2 parameters expected, {} given".format(len(args)))
+
+    params = evaluator.evaluate_parallel_args(args)
+
+    if not isinstance(params[0], ModuleType):
+        params[0] = import_module(args[0:1], node)
+
+    if not isinstance(params[1], str):
+        evaluator.error("2st param must be of type str, {} given".format(type(params[1])))
+
+    return getattr(params[0], params[1])
 
 
 def load_module_functions(module):

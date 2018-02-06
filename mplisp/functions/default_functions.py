@@ -41,8 +41,9 @@ def get_functions():
         "def": define.define,
         "lambda": lambda_expression.lambda_expression,
         "let": lambda_expression.let_expression,
-        "let*": lambda_expression.let_expression,
+        "let*": lambda_expression.let_star_expression,
         "import": module_import.import_module,
+        "get-attribute": module_import.python_getattr,
 
         "list": lists.create_list,
         "map": lists.map_list,
