@@ -9,6 +9,30 @@ def create_list(args: List, _):
     return evaluator.evaluate_parallel_args(args)
 
 
+def slice_list(args: List, _):
+    """slice of list"""
+    if len(args) < 2:
+        evaluator.error("at least 2 parameters expected, {} given.".format(len(args)))
+
+    param = evaluator.evaluate_node(args[0])
+
+    if not isinstance(param, list):
+        evaluator.error("1st parameter must be of type list")
+
+    params = evaluator.evaluate_parallel_args(args[1:])
+
+    if not isinstance(params[0], int):
+        evaluator.error("1st parameter must be of type int")
+
+    if len(args) == 2:
+        return param[params[0]:]
+
+    if not isinstance(params[1], int):
+        evaluator.error("2st parameter must be of type int")
+
+    return param[params[0]:params[1]]
+
+
 def map_list(args: List, node):
     """Map list"""
     if len(args) != 2:

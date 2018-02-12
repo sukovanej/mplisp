@@ -52,6 +52,7 @@ def get_functions():
         "list-ref": lists.list_ref,
         "apply": lists.list_apply,
         "length": lists.list_length,
+        "slice": lists.slice_list,
 
         "enumerate": lists.enumerate_list,
 

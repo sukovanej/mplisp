@@ -24,7 +24,7 @@ def import_module(args: List, node):
         evaluator.error("1st param must be of type str")
 
     local_path = module_name + ".mplisp"
-    absolute_path = os.path.join("/usr/lib/mplisp", module_name.replace(".", "/") + ".mplisp")
+    absolute_path = os.path.join("/usr/lib/mplisp", local_path)
     path = ''
 
     if os.path.isfile(local_path):
