@@ -34,8 +34,8 @@ def import_module(args: List, node):
 
     if path:
         with open(local_path) as file_object:
-            result = list(evaluator.evaluate(file_object.read(), node.getenv()))
-            return result
+            list(evaluator.evaluate(file_object.read(), node.getenv()))
+            return None
 
     mplispstd = module_name.replace("std", "mplispstd")
 
@@ -45,15 +45,6 @@ def import_module(args: List, node):
         evaluator.error("package {} not found".format(module_name))
 
     mod = importlib.import_module(module_name)
-
-    functions = {name.replace("_", "-"): func for name, func in load_module_functions(mod)}
-    inst = node.parent
-
-    while inst.local_env is None:
-        inst = inst.parent
-
-    inst.local_env.symbols.update(functions)
-
     return mod
 
 

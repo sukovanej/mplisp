@@ -30,7 +30,16 @@ def is_list(args: List, _):
 def to_bool(args: List, _):
     """Convert expression to its boolean value"""
     if len(args) != 1:
-        evaluator.error("1 parameters expected, {} given".format(len(args)))
+        evaluator.error("1 parameter expected, {} given".format(len(args)))
 
     value = evaluator.evaluate_node(args[0])
     return value not in FALSE_STATEMENTS
+
+
+def to_int(args: List, _):
+    """Convert expression to its boolean value"""
+    if len(args) != 1:
+        evaluator.error("1 parameter expected, {} given".format(len(args)))
+
+    value = evaluator.evaluate_node(args[0])
+    return int(value)

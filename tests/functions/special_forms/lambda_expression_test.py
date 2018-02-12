@@ -35,3 +35,34 @@ class TestLambdaExpression(unittest.TestCase):
         output1 = list(evaluator.evaluate(input1))
 
         self.assertEqual(output1, [None, 1, 2, 6, 24, 120])
+
+    def test_generator(self):
+        input1 = """
+        (def fc 
+            (lambda (a)
+                (lambda (x) (+ x a))))
+                
+        ((fc 1) 1)
+        ((fc 2) 1)
+        ((fc 1) 2)
+        
+        (def +2 (fc 2))
+        (def +1 (fc 1))
+        
+        (+1 1)
+        (+1 -2)
+        (+2 -2)
+        (+2 1)
+        (+2 2)
+        """
+
+        output1 = list(evaluator.evaluate(input1))
+
+        self.assertEqual(output1, [None, 2, 3, 3, None, None, 2, -1, 0, 3, 4])
+
+    def test_generator_2(self):
+        input1 = """
+        (lambda (a) (lambda (x) (+ x a)))
+        """
+
+        output1 = list(evaluator.evaluate(input1))

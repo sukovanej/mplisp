@@ -37,6 +37,7 @@ def get_functions():
         "list?": types.is_list,
 
         "->bool?": types.to_bool,
+        "->int": types.to_int,
 
         "def": define.define,
         "lambda": lambda_expression.lambda_expression,

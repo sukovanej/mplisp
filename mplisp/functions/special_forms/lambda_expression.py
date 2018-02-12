@@ -18,8 +18,7 @@ def lambda_expression(args: List, node):
     if len(args) != 2:
         evaluator.error("2 parameters expected, {} given".format(len(args)))
 
-    params = [arg.value for arg in args[0].children]
-    return create_lambda(params, node.children[2])
+    return create_lambda(args, node)
 
 
 def let_expression(args: List, node):
@@ -43,16 +42,16 @@ def let_star_expression(args: List, node):
     return evaluator.evaluate_node(args[1])
 
 
-def create_lambda(params, body):
+def create_lambda(args, node):
     """Generate lambda function"""
+    params = [arg.value for arg in args[0].children]
 
     def func(local_args: List, _):
         """Callable object"""
-        new_node = copy.deepcopy(body)
-        new_node.local_env = env.EnvNode({})
+        new_node = copy.deepcopy(node.children[2])
 
         for arg, value in zip(params, local_args):
-            new_node.local_env.symbols[arg] = evaluator.evaluate_node(value)
+            new_node.getenv().symbols[arg] = evaluator.evaluate_node(value)
 
         return evaluator.evaluate_node(new_node)
 
