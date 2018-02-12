@@ -16,6 +16,14 @@ class SyntaxTreeNode(object):
 
         return node
 
+    def getenv(self):
+        obj = self
+
+        while obj.local_env is None:
+            obj = obj.parent
+
+        return obj.local_env
+
     def __repr__(self, tab=' '):
         result = "(" + self.value + ")" + '\n'
 

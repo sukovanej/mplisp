@@ -22,3 +22,13 @@ class TestModuleImport(unittest.TestCase):
         output1 = list(evaluator.evaluate(input1))
 
         self.assertTrue(isinstance(output1[0], list))
+
+    def test_import_mplisp(self):
+        """test mplisp import"""
+        input1 = '''
+        (import "../../scripts/testlib")
+        (nice-string "test")
+        '''
+
+        output1 = list(evaluator.evaluate(input1))
+        self.assertEqual(output1[1], ">> test <<")

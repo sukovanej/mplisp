@@ -5,10 +5,12 @@ Exmaples:
 """
 from types import ModuleType
 from typing import List
+import os
 import importlib
 import importlib.util
 import inspect
 from mplisp import evaluator
+from mplisp.structures import env
 
 
 def import_module(args: List, node):
@@ -20,6 +22,21 @@ def import_module(args: List, node):
 
     if not isinstance(module_name, str):
         evaluator.error("1st param must be of type str")
+
+    local_path = module_name + ".mplisp"
+    absolute_path = os.path.join("/usr/lib/mplisp", module_name.replace(".", "/") + ".mplisp")
+    path = ''
+
+    if os.path.isfile(local_path):
+        path = local_path
+    elif os.path.isfile(absolute_path):
+        path = absolute_path
+
+    if path:
+        with open(local_path) as file_object:
+            result = list(evaluator.evaluate(file_object.read(), node.getenv()))
+
+            return result
 
     mplispstd = module_name.replace("std", "mplispstd")
 

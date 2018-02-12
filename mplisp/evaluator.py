@@ -9,11 +9,12 @@ from mplisp.lexer import STR_SURROUND
 def evaluate(value: str, local_env=None):
     """Evaluate input"""
     syntax_tree = syntax.create_tree(value)
+
     if local_env is None:
-        syntax_tree.local_env = env.EnvNode({})
-        syntax_tree.local_env.symbols = default_functions.get_functions()
-    else:
-        syntax_tree.local_env = local_env
+        local_env = env.EnvNode({})
+        local_env.symbols = default_functions.get_functions()
+
+    syntax_tree.local_env = local_env
 
     for node in syntax_tree.children:
         if node.value and node.value.startswith('#!'):  # shebang
