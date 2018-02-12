@@ -24,7 +24,7 @@ def lexer(value):
 
     for ch in value:
         # comment
-        if last == '\n' and ch == ';':
+        if ch == ';':
             state = 'comment'
 
         if state == 'comment':

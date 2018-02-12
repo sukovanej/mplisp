@@ -35,7 +35,6 @@ def import_module(args: List, node):
     if path:
         with open(local_path) as file_object:
             result = list(evaluator.evaluate(file_object.read(), node.getenv()))
-
             return result
 
     mplispstd = module_name.replace("std", "mplispstd")
@@ -71,7 +70,22 @@ def python_getattr(args: List, node):
     if not isinstance(params[1], str):
         evaluator.error("2st param must be of type str, {} given".format(type(params[1])))
 
-    return getattr(params[0], params[1])
+    attr = getattr(params[0], params[1])
+
+    if callable(attr):
+        return function_caller(attr)
+
+    return attr
+
+
+def function_caller(func_obj):
+    def func(local_args: List, _):
+        """Callable object"""
+        params = evaluator.evaluate_parallel_args(local_args)
+
+        return func_obj(*params)
+
+    return func
 
 
 def load_module_functions(module):

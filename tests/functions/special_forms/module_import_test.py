@@ -26,9 +26,19 @@ class TestModuleImport(unittest.TestCase):
     def test_import_mplisp(self):
         """test mplisp import"""
         input1 = '''
-        (import "../../scripts/testlib")
+        (import "scripts/testlib")
         (nice-string "test")
         '''
 
         output1 = list(evaluator.evaluate(input1))
         self.assertEqual(output1[1], ">> test <<")
+
+    def test_import_python_function(self):
+        """test mplisp import"""
+        input1 = '''
+        (def os-mod (import "os"))
+        ((get-attribute os-mod "getcwd"))
+        '''
+
+        output1 = list(evaluator.evaluate(input1))
+        self.assertTrue("mplisp/tests" in output1[1])
