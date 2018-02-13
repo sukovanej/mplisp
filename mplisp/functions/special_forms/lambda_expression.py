@@ -28,7 +28,7 @@ def let_expression(args: List, node):
             (x, evaluator.evaluate_node(x.children[1]))
 
         for name, value in executor.map(set_env, args[0].children):
-            node.local_env.symbols[name.children[0].value] = value
+            node.getenv().symbols[name.children[0].value] = value
 
     return evaluator.evaluate_node(args[1])
 
@@ -36,7 +36,7 @@ def let_expression(args: List, node):
 def let_star_expression(args: List, node):
     """Return let expression"""
     for param in args[0].children:
-        node.local_env.symbols[param.children[0].value] = evaluator.evaluate_node(
+        node.getenv().symbols[param.children[0].value] = evaluator.evaluate_node(
             param.children[1])
 
     return evaluator.evaluate_node(args[1])

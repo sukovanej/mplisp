@@ -16,8 +16,8 @@ def slice_list(args: List, _):
 
     param = evaluator.evaluate_node(args[0])
 
-    if not isinstance(param, list):
-        evaluator.error("1st parameter must be of type list")
+    if not isinstance(param, list) and not isinstance(param, str):
+        evaluator.error("1st parameter must be of type list or str")
 
     params = evaluator.evaluate_parallel_args(args[1:])
 
