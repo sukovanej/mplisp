@@ -1,4 +1,4 @@
-""" mlisp basic functions
+""" mplisp basic functions
 """
 from mplisp.functions.arithmetic import basic
 from mplisp.functions.special_forms import define
@@ -8,6 +8,7 @@ from mplisp.functions.special_forms import module_import
 from mplisp.functions.special_forms import types
 from mplisp.functions.special_forms import assert_value
 from mplisp.functions.list import lists
+from mplisp.functions.list import quote
 
 
 def get_functions():
@@ -54,6 +55,7 @@ def get_functions():
         "apply": lists.list_apply,
         "length": lists.list_length,
         "slice": lists.slice_list,
+        "quote": quote.quote,
 
         "enumerate": lists.enumerate_list,
 
