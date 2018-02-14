@@ -51,6 +51,9 @@ def lexer(value):
         # normal
         if ch == '(':
             yield (ch, line)
+
+            if last == '`':
+                yield ('quote', line)
         elif ch in (' ', '\n', ')'):
 
             if buffer:
@@ -59,7 +62,7 @@ def lexer(value):
 
             if ch == ')':
                 yield (ch, line)
-        else:
+        elif ch != '`':
             buffer.append(ch)
 
         last = ch
