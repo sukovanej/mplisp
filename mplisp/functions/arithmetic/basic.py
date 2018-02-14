@@ -39,20 +39,20 @@ def divide(args: List, _):
     return functools.reduce(lambda x, y: x / y, params)
 
 
-def sqrt(args: List, _):
+def sqrt(args: List, node):
     """Evaluates expression (sqrt a) as {sqrt(a)}"""
     if len(args) != 1:
         evaluator.error("wrong number of arguments, got {}, 1 expected".format(
-            str(len(args))))
+            str(len(args))), node)
 
     return math.sqrt(evaluator.evaluate_node(args[0]))
 
 
-def modulo(args: List, _):
+def modulo(args: List, node):
     """Evaluates expression (sqrt a) as {sqrt(a)}"""
     if len(args) != 2:
         evaluator.error("wrong number of arguments, got {}, 2 expected".format(
-            str(len(args))))
+            str(len(args))), node)
 
     params = evaluator.evaluate_parallel_args(args)
     return params[0] % params[1]

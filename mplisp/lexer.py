@@ -21,8 +21,12 @@ def lexer(value):
     buffer = list()
     last = ''
     state = 'normal'
+    line = 1
 
     for ch in value:
+        if ch == '\n':
+            line += 1
+
         # comment
         if ch == ';':
             state = 'comment'
@@ -46,19 +50,19 @@ def lexer(value):
 
         # normal
         if ch == '(':
-            yield ch
+            yield (ch, line)
         elif ch in (' ', '\n', ')'):
 
             if buffer:
-                yield ''.join(buffer)
+                yield (''.join(buffer), line)
                 buffer = list()
 
             if ch == ')':
-                yield ch
+                yield (ch, line)
         else:
             buffer.append(ch)
 
         last = ch
 
     if buffer:
-        yield ''.join(buffer)
+        yield (''.join(buffer), line)

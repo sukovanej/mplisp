@@ -9,6 +9,7 @@ class SyntaxTreeNode(object):
         self.children = children
         self.parent = parent
         self.local_env = local_env
+        self.line = 0
 
     def append(self, value):
         node = SyntaxTreeNode(value, [], self)

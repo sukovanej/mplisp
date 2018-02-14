@@ -16,7 +16,7 @@ from mplisp import evaluator
 def lambda_expression(args: List, node):
     """Return lambda expression"""
     if len(args) != 2:
-        evaluator.error("2 parameters expected, {} given".format(len(args)))
+        evaluator.error("2 parameters expected, {} given".format(len(args)), node)
 
     return create_lambda(args, node)
 

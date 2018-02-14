@@ -41,7 +41,7 @@ def evaluate_node(node: tree.SyntaxTreeNode):
                     if result == result_int:
                         result = result_int
                 except ValueError:
-                    error("{} not found".format(node.value))
+                    error("{} not found".format(node.value), node)
         elif isinstance(result, tree.SyntaxTreeNode):
             result = evaluate_node(result)
     else:
@@ -50,7 +50,7 @@ def evaluate_node(node: tree.SyntaxTreeNode):
         if callable(func):
             result = func(node.children[1:], node)
         else:
-            error("{} is not callable".format(node.children[0].value))
+            error("{} is not callable".format(node.children[0].value), node)
 
     return result
 
@@ -71,6 +71,6 @@ def evaluate_parallel_args(args):
         return list(executor.map(evaluate_node, args))
 
 
-def error(value: str):
+def error(value: str, node: tree.SyntaxTreeNode):
     """Return error message and exit"""
-    raise ValueError("[\033[91m error \033[0m: {} ]".format(value))
+    raise ValueError("[\033[91m error \033[0m: {} on line {}]".format(value, node.line))

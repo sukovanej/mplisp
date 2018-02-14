@@ -30,10 +30,14 @@ def create_tree(value: str) -> tree.SyntaxTreeNode:
 
 def syntax(token: str, node: tree.SyntaxTreeNode) -> tree.SyntaxTreeNode:
     """create node"""
-    if token == '(':
-        return node.append("")
-    elif token == ')':
+    if token[0] == '(':
+        new_node = node.append("")
+        new_node.line = token[1]
+        return new_node
+    elif token[0] == ')':
         return node.parent
 
-    node.append(token)
+    new_node = node.append(token[0])
+    new_node.line = token[1]
+
     return node
