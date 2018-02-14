@@ -44,6 +44,7 @@ def get_functions():
         "lambda": lambda_expression.lambda_expression,
         "let": lambda_expression.let_expression,
         "let*": lambda_expression.let_star_expression,
+
         "import": module_import.import_module,
         "get-attribute": module_import.python_getattr,
 
@@ -55,6 +56,8 @@ def get_functions():
         "apply": lists.list_apply,
         "length": lists.list_length,
         "slice": lists.slice_list,
+        "car": lists.car_list,
+        "cdr": lists.cdr_list,
         "quote": quote.quote,
 
         "enumerate": lists.enumerate_list,

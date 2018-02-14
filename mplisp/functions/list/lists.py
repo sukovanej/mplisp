@@ -9,6 +9,34 @@ def create_list(args: List, _):
     return evaluator.evaluate_parallel_args(args)
 
 
+def cdr_list(args: List, _):
+    """Create list"""
+
+    if len(args) != 1:
+        evaluator.error("1 parameter expected, {} given.".format(len(args)), node)
+
+    param = evaluator.evaluate_node(args[0])
+
+    if not isinstance(param, list):
+        evaluator.error("1st parameter must be of type list", node)
+
+    return param[1:]
+
+
+def car_list(args: List, _):
+    """Create list"""
+
+    if len(args) != 1:
+        evaluator.error("1 parameter expected, {} given.".format(len(args)), node)
+
+    param = evaluator.evaluate_node(args[0])
+
+    if not isinstance(param, list):
+        evaluator.error("1st parameter must be of type list", node)
+
+    return param[0]
+
+
 def slice_list(args: List, node):
     """slice of list"""
     if len(args) < 2:
