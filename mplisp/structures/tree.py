@@ -1,4 +1,7 @@
 from typing import List
+
+import copy
+
 from . import env
 
 
@@ -24,6 +27,16 @@ class SyntaxTreeNode(object):
             obj = obj.parent
 
         return obj.local_env
+
+    def __copy__(self):
+        new_parent = type(self)(self.value, [], self.parent, copy.copy(self.local_env))
+
+        for node in self.children:
+            new_node = copy.copy(node)
+            new_node.parent = new_parent
+            new_parent.children.append(new_node)
+
+        return new_parent
 
     def __repr__(self, tab=' '):
         result = "(" + self.value + ")" + '\n'

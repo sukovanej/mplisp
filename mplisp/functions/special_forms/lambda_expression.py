@@ -9,7 +9,7 @@ Examples:
 from typing import List
 import copy
 import concurrent.futures
-from mplisp.structures import env
+from mplisp.structures import env, tree
 from mplisp import evaluator
 
 
@@ -42,16 +42,18 @@ def let_star_expression(args: List, node):
     return evaluator.evaluate_node(args[1])
 
 
-def create_lambda(args, node):
+def create_lambda(args, node: tree.SyntaxTreeNode):
     """Generate lambda function"""
     params = [arg.value for arg in args[0].children]
 
     def func(local_args: List, _):
         """Callable object"""
-        new_node = copy.deepcopy(node.children[2])
+        new_node = copy.copy(node.children[2])
+        if new_node.local_env is None:
+            new_node.local_env = env.EnvNode({})
 
         for arg, value in zip(params, local_args):
-            new_node.getenv().symbols[arg] = evaluator.evaluate_node(value)
+            new_node.local_env.symbols[arg] = evaluator.evaluate_node(value)
 
         return evaluator.evaluate_node(new_node)
 
