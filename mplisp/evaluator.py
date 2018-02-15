@@ -31,17 +31,10 @@ def evaluate_node(node: tree.SyntaxTreeNode):
         result = evaluate_symbol(node.value, node)
 
         if result is None:
-            if node.value[0] in STR_SURROUND and node.value[len(node.value) - 1] == node.value[0]:
-                result = str(node.value[1:-1])
-            else:
-                try:
-                    result = float(node.value)
-                    result_int = int(result)
+            result = evaluate_value_symbol(node.value)
 
-                    if result == result_int:
-                        result = result_int
-                except ValueError:
-                    error("{} not found".format(node.value), node)
+            if result is None:
+                error("{} not found".format(node.value), node)
         elif isinstance(result, tree.SyntaxTreeNode):
             result = evaluate_node(result)
     else:
@@ -53,6 +46,23 @@ def evaluate_node(node: tree.SyntaxTreeNode):
             error("{} is not callable".format(node.children[0].value), node)
 
     return result
+
+
+def evaluate_value_symbol(symbol: str):
+    """Evaluate simple symbol -> int|string|None"""
+    if symbol[0] in STR_SURROUND and symbol[-1] == symbol[0]:
+        return str(symbol[1:-1])
+    else:
+        try:
+            result = float(symbol)
+            result_int = int(result)
+
+            if result == result_int:
+                return result_int
+
+            return result
+        except ValueError:
+            return None
 
 
 def evaluate_symbol(symbol: str, node: tree.SyntaxTreeNode):

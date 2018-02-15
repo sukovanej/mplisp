@@ -149,8 +149,9 @@ def filter_list(args: List, node):
     function_object = evaluator.evaluate_node(args[0])
 
     if not callable(function_object):
-        evaluator.error("map function is not callable", node)
+        evaluator.error("1st parameter is not callable", node)
 
     arg_list = evaluator.evaluate_node(args[1])
 
     return list(filter(lambda x: function_object([x], node), arg_list))
+
