@@ -3,7 +3,7 @@ from distutils.core import setup
 
 setup(
     name='mplisp',
-    version='0.3',
+    version='0.1',
     packages=[
         'mplisp',
         'mplisp.functions',

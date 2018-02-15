@@ -11,7 +11,7 @@ def assert_value(args: List, node):
     value = evaluator.evaluate_node(args[0])
 
     if value in FALSE_STATEMENTS:
-        evaluator.error("Assertion failed: {}".format(node), node)
+        evaluator.error("assertion failed: {}".format(value), node)
 
     return None
 
@@ -24,6 +24,6 @@ def assert_equal(args: List, node):
     values = evaluator.evaluate_parallel_args(args)
 
     if values[0] != values[1]:
-        evaluator.error("Assertion failed: {} != {} \n {}".format(values[0], values[1], node), node)
+        evaluator.error("assertion failed: {} != {}".format(values[0], values[1]), node)
 
     return None
