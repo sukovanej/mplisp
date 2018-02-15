@@ -22,14 +22,24 @@ def create_tree(value: str) -> tree.SyntaxTreeNode:
     main_node = tree.SyntaxTreeNode("", [], None)
     actual_node = main_node
 
+    last_token = ('', 0)
+
     for token in lexer.lexer(value):
-        actual_node = syntax(token, actual_node)
+        actual_node = syntax(token, actual_node, last_token)
+        last_token = token
 
     return main_node
 
 
-def syntax(token: str, node: tree.SyntaxTreeNode) -> tree.SyntaxTreeNode:
+def syntax(token, node: tree.SyntaxTreeNode, last_token) -> tree.SyntaxTreeNode:
     """create node"""
+    if token[0] == '`':
+        return node
+
+    if last_token[0] == "`":
+        node = node.append("")
+        node.append("quote")
+
     if token[0] == '(':
         new_node = node.append("")
         new_node.line = token[1]

@@ -5,28 +5,32 @@ from mplisp.structures import tree
 import mplisp.evaluator
 
 
-def quote(args: List, _):
+def quote(args: List, node):
     """Create list"""
-    return _syntax_tree_to_list(args)
+    if len(args) != 1:
+        mplisp.evaluator.error("1 parameter expected, {} given.".format(len(args)), node)
+
+    return _syntax_tree_to_list(args[0])
 
 
-def _syntax_tree_to_list(node_array: List[tree.SyntaxTreeNode]):
-    if len(node_array) == 1 and not node_array[0].children:
-        value = mplisp.evaluator.evaluate_value_symbol(node_array[0].value)
-        if value is None:
-            value = node_array[0].value
+def _evaluate_value(value):
+    result = mplisp.evaluator.evaluate_value_symbol(value)
 
-        return value
+    if result is None:
+        result = value
+
+    return result
+
+
+def _syntax_tree_to_list(node: tree.SyntaxTreeNode):
+    if not node.children:
+        return _evaluate_value(node.value)
 
     result = []
-    for node in node_array:
+    for node in node.children:
         if node.children:
-            result.append(_syntax_tree_to_list(node.children))
+            result.append(_syntax_tree_to_list(node))
         else:
-            value = mplisp.evaluator.evaluate_value_symbol(node.value)
-            if value is None:
-                value = node.value
-
-            result.append(value)
+            result.append(_evaluate_value(node.value))
 
     return result
