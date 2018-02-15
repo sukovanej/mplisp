@@ -9,30 +9,30 @@ def create_list(args: List, _):
     return evaluator.evaluate_parallel_args(args)
 
 
-def cdr_list(args: List, _):
+def cdr_list(args: List, node):
     """Create list"""
 
     if len(args) != 1:
-        evaluator.error("1 parameter expected, {} given.".format(len(args)), node)
+        evaluator.error("(lists.lists.cdr) 1 parameter expected, {} given.".format(len(args)), node)
 
     param = evaluator.evaluate_node(args[0])
 
     if not isinstance(param, list):
-        evaluator.error("1st parameter must be of type list", node)
+        evaluator.error("(lists.lists.cdr) 1st parameter must be of type list", node)
 
     return param[1:]
 
 
-def car_list(args: List, _):
+def car_list(args: List, node):
     """Create list"""
 
     if len(args) != 1:
-        evaluator.error("1 parameter expected, {} given.".format(len(args)), node)
+        evaluator.error("(lists.lists.car) 1 parameter expected, {} given.".format(len(args)), node)
 
     param = evaluator.evaluate_node(args[0])
 
     if not isinstance(param, list):
-        evaluator.error("1st parameter must be of type list", node)
+        evaluator.error("(lists.lists.car) 1st parameter must be of type list", node)
 
     return param[0]
 
@@ -40,23 +40,23 @@ def car_list(args: List, _):
 def slice_list(args: List, node):
     """slice of list"""
     if len(args) < 2:
-        evaluator.error("at least 2 parameters expected, {} given.".format(len(args)), node)
+        evaluator.error("(lists.lists.slice) at least 2 parameters expected, {} given.".format(len(args)), node)
 
     param = evaluator.evaluate_node(args[0])
 
     if not isinstance(param, list) and not isinstance(param, str):
-        evaluator.error("1st parameter must be of type list or str", node)
+        evaluator.error("(lists.lists.slice) 1st parameter must be of type list or str", node)
 
     params = evaluator.evaluate_parallel_args(args[1:])
 
     if not isinstance(params[0], int):
-        evaluator.error("1st parameter must be of type int", node)
+        evaluator.error("(lists.lists.slice) 1st parameter must be of type int", node)
 
     if len(args) == 2:
         return param[params[0]:]
 
     if not isinstance(params[1], int):
-        evaluator.error("2st parameter must be of type int", node)
+        evaluator.error("(lists.lists.slice) 2st parameter must be of type int", node)
 
     return param[params[0]:params[1]]
 
@@ -64,19 +64,19 @@ def slice_list(args: List, node):
 def map_list(args: List, node):
     """Map list"""
     if len(args) != 2:
-        evaluator.error("2 parameters expected, {} given.".format(len(args)), node)
+        evaluator.error("(lists.lists.map) 2 parameters expected, {} given.".format(len(args)), node)
 
     function_object = evaluator.evaluate_node(args[0])
 
     if not callable(function_object):
-        evaluator.error("map function is not callable", node)
+        evaluator.error("(lists.lists.map) map function is not callable", node)
 
     arg_list = evaluator.evaluate_node(args[1])
 
     return list(map(lambda x: function_object([x], node), arg_list))
 
 
-def gen_list(args: List, node):
+def gen_list(args: List, _):
     """get range(*params)"""
     params = evaluator.evaluate_parallel_args(args)
 
@@ -87,18 +87,18 @@ def list_ref(args: List, _):
     """Check whether the first argument is list and the second one is int.
     Return element on that position"""
     if len(args) != 2:
-        evaluator.error("2 parameters expected, {} given.".format(len(args)), node)
+        evaluator.error("(lists.lists.list-ref) 2 parameters expected, {} given.".format(len(args)), node)
 
     params = evaluator.evaluate_parallel_args(args)
 
     if not isinstance(params[0], list):
-        evaluator.error("1st parameter must be of type list", node)
+        evaluator.error("(lists.lists.list-ref) 1st parameter must be of type list", node)
 
     if not isinstance(params[1], int):
-        evaluator.error("2st parameter must be of type list", node)
+        evaluator.error("(lists.lists.list-ref) 2st parameter must be of type list", node)
 
     if params[1] < 0 or params[1] >= len(params[0]):
-        evaluator.error("index {} is out of range".format(params[1]), node)
+        evaluator.error("(lists.lists.list-ref) index {} is out of range".format(params[1]), node)
 
     return params[0][params[1]]
 
@@ -106,17 +106,17 @@ def list_ref(args: List, _):
 def list_apply(args: List, node):
     """Evaluate function on params given by list"""
     if len(args) != 2:
-        evaluator.error("2 parameters expected, {} given.".format(len(args)), node)
+        evaluator.error("(lists.lists.apply) 2 parameters expected, {} given.".format(len(args)), node)
 
     function_object = evaluator.evaluate_node(args[0])
 
     if not callable(function_object):
-        evaluator.error("apply function is not callable", node)
+        evaluator.error("(lists.lists.apply) apply function is not callable", node)
 
     arg_list = evaluator.evaluate_node(args[1])
 
     if not isinstance(arg_list, list):
-        evaluator.error("apply function is not callable", node)
+        evaluator.error("(lists.lists.apply) apply function is not callable", node)
 
     return function_object(arg_list, node)
 
@@ -126,7 +126,7 @@ def list_length(args: List, node):
     value = evaluator.evaluate_node(args[0])
 
     if not isinstance(value, list):
-        evaluator.error("1st argument must be list", node)
+        evaluator.error("(lists.lists.list-length) 1st argument must be list", node)
 
     return len(value)
 
@@ -136,7 +136,7 @@ def enumerate_list(args: List, node):
     value = evaluator.evaluate_node(args[0])
 
     if not isinstance(value, list):
-        evaluator.error("1st argument must be list", node)
+        evaluator.error("(lists.lists.enumerate) 1st argument must be list", node)
 
     return list(enumerate(value))
 
@@ -144,12 +144,12 @@ def enumerate_list(args: List, node):
 def filter_list(args: List, node):
     """Filter list"""
     if len(args) != 2:
-        evaluator.error("2 parameters expected, {} given.".format(len(args)), node)
+        evaluator.error("(lists.lists.filter) 2 parameters expected, {} given.".format(len(args)), node)
 
     function_object = evaluator.evaluate_node(args[0])
 
     if not callable(function_object):
-        evaluator.error("1st parameter is not callable", node)
+        evaluator.error("(lists.lists.filter) 1st parameter is not callable", node)
 
     arg_list = evaluator.evaluate_node(args[1])
 

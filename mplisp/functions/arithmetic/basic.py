@@ -42,7 +42,7 @@ def divide(args: List, _):
 def sqrt(args: List, node):
     """Evaluates expression (sqrt a) as {sqrt(a)}"""
     if len(args) != 1:
-        evaluator.error("wrong number of arguments, got {}, 1 expected".format(
+        evaluator.error("(arithmetic.basic.sqrt) wrong number of arguments, got {}, 1 expected".format(
             str(len(args))), node)
 
     return math.sqrt(evaluator.evaluate_node(args[0]))
@@ -51,7 +51,7 @@ def sqrt(args: List, node):
 def modulo(args: List, node):
     """Evaluates expression (sqrt a) as {sqrt(a)}"""
     if len(args) != 2:
-        evaluator.error("wrong number of arguments, got {}, 2 expected".format(
+        evaluator.error("(arithmetic.basic.modulo) wrong number of arguments, got {}, 2 expected".format(
             str(len(args))), node)
 
     params = evaluator.evaluate_parallel_args(args)

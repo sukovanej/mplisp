@@ -8,7 +8,7 @@ import mplisp.evaluator
 def quote(args: List, node):
     """Create list"""
     if len(args) != 1:
-        mplisp.evaluator.error("1 parameter expected, {} given.".format(len(args)), node)
+        mplisp.evaluator.error("(lists.quote.quote) 1 parameter expected, {} given.".format(len(args)), node)
 
     return _syntax_tree_to_list(args[0])
 
@@ -23,12 +23,12 @@ def _evaluate_value(value):
 
 
 def _syntax_tree_to_list(node: tree.SyntaxTreeNode):
-    if not node.children:
+    if node.value:
         return _evaluate_value(node.value)
 
     result = []
     for node in node.children:
-        if node.children:
+        if not node.value:
             result.append(_syntax_tree_to_list(node))
         else:
             result.append(_evaluate_value(node.value))

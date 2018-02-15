@@ -26,7 +26,7 @@ def or_statement(args: List, _):
 def smaller_statement(args: List, node):
     """Evaluate (< a b) as {a < b}"""
     if len(args) != 2:
-        evaluator.error("2 parameters expected, {} given".format(len(args)), node)
+        evaluator.error("(special_forms.control_statements.smaller) 2 parameters expected, {} given".format(len(args)), node)
 
     return evaluator.evaluate_node(args[0]) < evaluator.evaluate_node(args[1])
 
@@ -34,7 +34,7 @@ def smaller_statement(args: List, node):
 def not_statement(args: List, node):
     """Evaluate (< a b) as {a < b}"""
     if len(args) != 1:
-        evaluator.error("1 parameter expected, {} given".format(len(args)), node)
+        evaluator.error("(special_forms.control_statements.not) 1 parameter expected, {} given".format(len(args)), node)
 
     return evaluator.evaluate_node(args[0]) in FALSE_STATEMENTS
 
@@ -42,7 +42,7 @@ def not_statement(args: List, node):
 def greater_statement(args: List, node):
     """Evaluate (> a b) as {a > b}"""
     if len(args) != 2:
-        evaluator.error("2 parameters expected, {} given".format(len(args)), node)
+        evaluator.error("(special_forms.control_statements.greater) 2 parameters expected, {} given".format(len(args)), node)
 
     return evaluator.evaluate_node(args[0]) > evaluator.evaluate_node(args[1])
 
@@ -50,7 +50,7 @@ def greater_statement(args: List, node):
 def not_equals_statement(args: List, node):
     """Evaluate (!= a b) as {a != b}"""
     if len(args) != 2:
-        evaluator.error("2 parameters expected, {} given".format(len(args)), node)
+        evaluator.error("(special_forms.control_statements.not_equals) 2 parameters expected, {} given".format(len(args)), node)
 
     return evaluator.evaluate_node(args[0]) != evaluator.evaluate_node(args[1])
 
@@ -58,7 +58,7 @@ def not_equals_statement(args: List, node):
 def equals_statement(args: List, node):
     """Evaluate (== a b) as {a == b}"""
     if len(args) != 2:
-        evaluator.error("2 parameters expected, {} given".format(len(args)), node)
+        evaluator.error("(special_forms.control_statements.equals) 2 parameters expected, {} given".format(len(args)), node)
 
     return evaluator.evaluate_node(args[0]) == evaluator.evaluate_node(args[1])
 
@@ -66,7 +66,7 @@ def equals_statement(args: List, node):
 def if_statement(args: List, node):
     """Evaluate (if cond a b) as {(cond) ? a : b}"""
     if len(args) != 3:
-        evaluator.error("3 parameters expected, {} given".format(len(args)), node)
+        evaluator.error("(special_forms.control_statements.if) 3 parameters expected, {} given".format(len(args)), node)
 
     condition = evaluator.evaluate_node(args[0])
 
