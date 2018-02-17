@@ -6,7 +6,7 @@ from mplisp.functions import default_functions
 from mplisp.lexer import STR_SURROUND
 
 
-def evaluate(value: str, local_env=None):
+def evaluate(value: str, local_env=None, run_tests=False):
     """Evaluate input"""
     syntax_tree = syntax.create_tree(value)
 
@@ -18,6 +18,10 @@ def evaluate(value: str, local_env=None):
 
     for node in syntax_tree.children:
         if node.value and node.value.startswith('#!'):  # shebang
+            continue
+
+        if node.children and node.children[0].value \
+                and node.children[0].value[-1] == "!" and not run_tests:
             continue
 
         yield evaluate_node(node)

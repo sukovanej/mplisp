@@ -2,7 +2,8 @@
 import argparse
 from mplisp import evaluator
 
-def eval(args):
+
+def run(args):
     if not args.eval:
         with open(args.input) as file_object:
             input_value = file_object.read()
@@ -10,7 +11,7 @@ def eval(args):
         input_value = args.input
 
     try:
-        result = evaluator.evaluate(input_value)
+        result = evaluator.evaluate(input_value, None, args.test)
 
         for line in result:
             if line is not None:
@@ -22,13 +23,13 @@ def eval(args):
 def main():
     parser = argparse.ArgumentParser(description='mplisp interpreter')
     parser.add_argument('input', help='input (file or string)')
-    parser.add_argument('-e', '--eval', help='evaluate the input', 
-            action='store_true')
+    parser.add_argument('-e', '--eval', help='evaluate the input',
+                        action='store_true')
+    parser.add_argument('-t', '--test', help='run tests ((.*)! functions)',
+                        action='store_true')
 
-    args = parser.parse_args()
-    eval(args)
+    run(parser.parse_args())
 
 
 if __name__ == "__main__":
     main()
-
