@@ -45,6 +45,9 @@ def syntax(token, node: tree.SyntaxTreeNode, last_token) -> tree.SyntaxTreeNode:
         new_node.line = token[1]
         return new_node
     elif token[0] == ')':
+        if node.parent and node.parent.children and node.parent.children[0].value == 'quote':
+            return node.parent.parent
+
         return node.parent
 
     new_node = node.append(token[0])

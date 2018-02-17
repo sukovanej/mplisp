@@ -15,6 +15,11 @@ class SyntaxTreeNode(object):
         self.line = 0
 
     def append(self, value):
+        if isinstance(value, type(self)):
+            value.parent = self
+            self.children.append(value)
+            return value
+
         node = SyntaxTreeNode(value, [], self)
         self.children.append(node)
 
