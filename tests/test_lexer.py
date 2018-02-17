@@ -50,3 +50,12 @@ class TestLexer(unittest.TestCase):
         self.assertEqual(output4, output_expected_4)
         self.assertEqual(output5, output_expected_5)
         self.assertEqual(output6, output_expected_6)
+
+    def test_quote_advanced(self):
+        input1 = "(== l `())"
+
+        output1 = list(lexer.lexer(input1))
+
+        output_expected_1 = [('(', 1), ('==', 1), ('l', 1), ('`', 1), ('(', 1), (')', 1), (')', 1)]
+
+        self.assertEqual(output1, output_expected_1)

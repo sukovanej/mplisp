@@ -43,3 +43,14 @@ class TestSyntax(unittest.TestCase):
         self.assertEqual(output4.children[0].children[1].children[0].children[0].value, '1')
         self.assertEqual(output4.children[0].children[1].children[0].children[1].value, '2')
         self.assertEqual(output4.children[0].children[1].children[1].value, '1')
+
+    def test_quote_advanced(self):
+        input1 = "(== l `(1 2) 1 2)"
+
+        output1 = syntax.create_tree(input1)
+
+        self.assertEqual(output1.children[0].children[2].children[0].value, 'quote')
+        self.assertEqual(output1.children[0].children[0].value, '==')
+        self.assertEqual(output1.children[0].children[1].value, 'l')
+        self.assertEqual(output1.children[0].children[3].value, '1')
+        self.assertEqual(output1.children[0].children[4].value, '2')

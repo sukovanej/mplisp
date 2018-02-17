@@ -50,7 +50,7 @@ def evaluate_node(node: tree.SyntaxTreeNode):
 
 def evaluate_value_symbol(symbol: str):
     """Evaluate simple symbol -> int|string|None"""
-    if symbol[0] in STR_SURROUND and symbol[-1] == symbol[0]:
+    if symbol and symbol[0] in STR_SURROUND and symbol[-1] == symbol[0]:
         return str(symbol[1:-1])
     else:
         try:
