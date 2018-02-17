@@ -1,24 +1,34 @@
 #!/usr/bin/env python3
-import sys
+import argparse
 from mplisp import evaluator
+
+def eval(args):
+    if not args.eval:
+        with open(args.input) as file_object:
+            input_value = file_object.read()
+    else:
+        input_value = args.input
+
+    try:
+        result = evaluator.evaluate(input_value)
+
+        for line in result:
+            if line is not None:
+                print(line)
+    except ValueError as e:
+        print(e.args[0])
 
 
 def main():
-    if len(sys.argv) < 2:
-        print("At least 1 parameter expected.")
-        quit(1)
+    parser = argparse.ArgumentParser(description='mplisp interpreter')
+    parser.add_argument('input', help='input (file or string)')
+    parser.add_argument('-e', '--eval', help='evaluate the input', 
+            action='store_true')
 
-    filename = sys.argv[1]
-    with open(filename) as file_object:
-        try:
-            result = evaluator.evaluate(file_object.read())
-
-            for line in result:
-                if line is not None:
-                    print(line)
-        except ValueError as e:
-            print(e.args[0])
+    args = parser.parse_args()
+    eval(args)
 
 
 if __name__ == "__main__":
     main()
+
