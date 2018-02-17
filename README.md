@@ -194,3 +194,40 @@ mplisp> 'hello world'
 mplisp> hello world
 [ error : hello not found ]
 ```
+
+
+### Testing the code
+
+Lets assume sample code below (file **sample.mplisp**).
+
+```lisp
+; Check whether the {value} is in the {list}
+; Usage: (list-in {list} {value})
+(def list-in
+    (lambda (l val)
+        (apply or? (map (lambda (x) (== val x)) l))))
+```
+
+One can easily run unittests using builtin function `assert!` and `assert-equal!`.
+Lets and tests to the file.
+
+```lisp
+; TESTS
+(assert! (list-in (list 1 2) 1))
+(assert! (list-in (list 1 2) 2))
+(assert! (not? (list-in (list 1 2) 3)))
+; /TESTS
+```
+
+By this bash script sample is run without the tests
+
+```bash
+mplisp sample.mplisp
+```
+
+and with `--test` or `-t` flag one can enforce the interpreter
+to run also all the tests.
+
+```bash
+mplisp -t sample.mplisp
+```
